@@ -1,3 +1,4 @@
+[athletico.html](https://github.com/user-attachments/files/25404023/athletico.html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1069,6 +1070,7 @@
     <li><a href="#" onclick="showPage('coaches',this)">For Coaches</a></li>
     <li><a href="#" onclick="showPage('pricing',this)">Pricing</a></li>
     <li><a href="#" onclick="showPage('about',this)">About</a></li>
+    <li><a href="#" onclick="showPage('demo',this)">Demo Player Dashboard</a></li>
     <li><a href="#" class="nav-cta" onclick="showPage('signup',this)">Get Early Access</a></li>
   </ul>
 </nav>
@@ -1685,6 +1687,84 @@
         <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:16px;">We'll reach out within 24 hours.</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════ DEMO PLAYER DASHBOARD PAGE ═══════════════ -->
+<div id="page-demo" class="page">
+  <div style="
+    width: 100%;
+    height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    background: var(--navy);
+  ">
+    <!-- Header bar -->
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    ">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="
+          width: 8px; height: 8px;
+          background: #4ADE80;
+          border-radius: 50%;
+          box-shadow: 0 0 8px #4ADE80;
+          animation: pulse 2s infinite;
+        "></div>
+        <span style="
+          font-family:'Barlow Condensed',sans-serif;
+          font-weight:700;
+          font-size:13px;
+          letter-spacing:0.12em;
+          text-transform:uppercase;
+          color:rgba(255,255,255,0.5);
+        ">Live Demo</span>
+        <span style="
+          font-family:'Barlow Condensed',sans-serif;
+          font-weight:800;
+          font-size:16px;
+          text-transform:uppercase;
+          color:white;
+        ">Player Dashboard Preview</span>
+      </div>
+      <a href="https://frojas1203.github.io/Player-Profile/" target="_blank" style="
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        background:rgba(216,31,38,0.15);
+        border:1px solid rgba(216,31,38,0.4);
+        color:rgba(255,255,255,0.8);
+        text-decoration:none;
+        padding:8px 18px;
+        border-radius:4px;
+        font-family:'Barlow Condensed',sans-serif;
+        font-weight:700;
+        font-size:13px;
+        letter-spacing:0.08em;
+        text-transform:uppercase;
+        transition:all 0.2s;
+      " onmouseover="this.style.background='rgba(216,31,38,0.3)'" onmouseout="this.style.background='rgba(216,31,38,0.15)'">
+        Open Full Page ↗
+      </a>
+    </div>
+    <!-- iframe -->
+    <iframe
+      src="https://frojas1203.github.io/Player-Profile/"
+      style="
+        flex: 1;
+        width: 100%;
+        border: none;
+        display: block;
+      "
+      title="Player Profile Demo Dashboard"
+      loading="lazy"
+    ></iframe>
   </div>
 </div>
 
