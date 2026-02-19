@@ -1,4 +1,4 @@
-[athletico.html](https://github.com/user-attachments/files/25404023/athletico.html)
+[athletico (1).html](https://github.com/user-attachments/files/25404113/athletico.1.html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1691,82 +1691,422 @@
 </div>
 
 <!-- ═══════════════ DEMO PLAYER DASHBOARD PAGE ═══════════════ -->
-<div id="page-demo" class="page">
-  <div style="
+<style>
+  /* All selectors prefixed with #page-demo so nothing leaks to other pages */
+
+  #page-demo {
+    background: var(--navy);
+  }
+
+  #demo-shell {
     width: 100%;
     height: calc(100vh - 72px);
     display: flex;
     flex-direction: column;
-    background: var(--navy);
-  ">
-    <!-- Header bar -->
-    <div style="
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 48px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      flex-shrink: 0;
-    ">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div style="
-          width: 8px; height: 8px;
-          background: #4ADE80;
-          border-radius: 50%;
-          box-shadow: 0 0 8px #4ADE80;
-          animation: pulse 2s infinite;
-        "></div>
-        <span style="
-          font-family:'Barlow Condensed',sans-serif;
-          font-weight:700;
-          font-size:13px;
-          letter-spacing:0.12em;
-          text-transform:uppercase;
-          color:rgba(255,255,255,0.5);
-        ">Live Demo</span>
-        <span style="
-          font-family:'Barlow Condensed',sans-serif;
-          font-weight:800;
-          font-size:16px;
-          text-transform:uppercase;
-          color:white;
-        ">Player Dashboard Preview</span>
+  }
+
+  /* ── Top bar ── */
+  #demo-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
+  }
+
+  #demo-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #demo-live-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ADE80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4ADE80;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  #demo-label-dim {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  #demo-label-bright {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  #demo-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(216,31,38,0.15);
+    border: 1px solid rgba(216,31,38,0.4);
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  #demo-open-btn:hover { background: rgba(216,31,38,0.3); }
+
+  /* ── Main content row ── */
+  #demo-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  #demo-iframe {
+    flex: 1;
+    border: none;
+    display: block;
+    min-width: 0;
+  }
+
+  /* ── School Fit Sidebar ── */
+  #demo-sidebar {
+    width: 292px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.025);
+    border-left: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 24px 20px 28px;
+    gap: 0;
+  }
+
+  #demo-sidebar::-webkit-scrollbar { width: 4px; }
+  #demo-sidebar::-webkit-scrollbar-track { background: transparent; }
+  #demo-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+  #demo-sidebar-header {
+    margin-bottom: 6px;
+  }
+
+  #demo-sidebar-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  #demo-sidebar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    line-height: 1.05;
+    margin-bottom: 4px;
+  }
+
+  #demo-sidebar-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* ── School fit cards ── */
+  .demo-fit-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .demo-fit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s;
+  }
+
+  .demo-fit-card:hover {
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .demo-fit-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .demo-fit-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .demo-fit-rank {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .demo-fit-score-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: #4ADE80;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 100px;
+    padding: 2px 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .demo-fit-school {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  .demo-fit-conf {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .demo-fit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .demo-fit-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 3px 8px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .demo-fit-bar-wrap {
+    margin-top: 10px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 100px;
+    height: 4px;
+    overflow: hidden;
+  }
+
+  .demo-fit-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--red), #FF6B6B);
+    transition: width 0.8s ease;
+  }
+
+  /* ── Divider ── */
+  #demo-sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin: 14px 0 16px;
+  }
+
+  #demo-sidebar-looking-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 10px;
+  }
+
+  /* ── View More button ── */
+  #demo-view-more-btn {
+    margin-top: 6px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 6px;
+    padding: 11px 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  #demo-view-more-btn:hover {
+    border-color: var(--red);
+    color: white;
+    background: rgba(216,31,38,0.08);
+  }
+
+  #demo-view-more-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.2s;
+  }
+
+  #demo-view-more-btn:hover svg {
+    transform: translateY(2px);
+  }
+</style>
+
+<div id="page-demo" class="page">
+  <div id="demo-shell">
+
+    <!-- ── Top bar ── -->
+    <div id="demo-topbar">
+      <div id="demo-topbar-left">
+        <div id="demo-live-dot"></div>
+        <span id="demo-label-dim">Live Demo</span>
+        <span id="demo-label-bright">Player Dashboard Preview</span>
       </div>
-      <a href="https://frojas1203.github.io/Player-Profile/" target="_blank" style="
-        display:inline-flex;
-        align-items:center;
-        gap:8px;
-        background:rgba(216,31,38,0.15);
-        border:1px solid rgba(216,31,38,0.4);
-        color:rgba(255,255,255,0.8);
-        text-decoration:none;
-        padding:8px 18px;
-        border-radius:4px;
-        font-family:'Barlow Condensed',sans-serif;
-        font-weight:700;
-        font-size:13px;
-        letter-spacing:0.08em;
-        text-transform:uppercase;
-        transition:all 0.2s;
-      " onmouseover="this.style.background='rgba(216,31,38,0.3)'" onmouseout="this.style.background='rgba(216,31,38,0.15)'">
+      <a id="demo-open-btn" href="https://frojas1203.github.io/Player-Profile/" target="_blank">
         Open Full Page ↗
       </a>
     </div>
-    <!-- iframe -->
-    <iframe
-      src="https://frojas1203.github.io/Player-Profile/"
-      style="
-        flex: 1;
-        width: 100%;
-        border: none;
-        display: block;
-      "
-      title="Player Profile Demo Dashboard"
-      loading="lazy"
-    ></iframe>
+
+    <!-- ── Main body: iframe + sidebar ── -->
+    <div id="demo-body">
+
+      <!-- Player Profile iframe -->
+      <iframe
+        id="demo-iframe"
+        src="https://frojas1203.github.io/Player-Profile/"
+        title="Player Profile Demo Dashboard"
+        loading="lazy"
+      ></iframe>
+
+      <!-- ── School Fit Sidebar ── -->
+      <div id="demo-sidebar">
+
+        <div id="demo-sidebar-header">
+          <div id="demo-sidebar-eyebrow">✦ AI Match Engine</div>
+          <div id="demo-sidebar-title">Schools Looking<br>For This Fit</div>
+          <div id="demo-sidebar-sub">Top programs actively recruiting your profile. Updated in real-time.</div>
+        </div>
+
+        <!-- Card 1: SMU -->
+        <div class="demo-fit-card">
+          <div class="demo-fit-card-top">
+            <span class="demo-fit-rank">#1 Best Fit</span>
+            <span class="demo-fit-score-badge">96% Match</span>
+          </div>
+          <div class="demo-fit-school">SMU</div>
+          <div class="demo-fit-conf">ACC · Dallas, TX</div>
+          <div class="demo-fit-tags">
+            <span class="demo-fit-tag">Air Raid</span>
+            <span class="demo-fit-tag">WR Need</span>
+            <span class="demo-fit-tag">$52K NIL</span>
+          </div>
+          <div class="demo-fit-bar-wrap">
+            <div class="demo-fit-bar-fill" style="width:96%"></div>
+          </div>
+        </div>
+
+        <!-- Card 2: Ole Miss -->
+        <div class="demo-fit-card">
+          <div class="demo-fit-card-top">
+            <span class="demo-fit-rank">#2 Best Fit</span>
+            <span class="demo-fit-score-badge">91% Match</span>
+          </div>
+          <div class="demo-fit-school">Ole Miss</div>
+          <div class="demo-fit-conf">SEC · Oxford, MS</div>
+          <div class="demo-fit-tags">
+            <span class="demo-fit-tag">Spread Offense</span>
+            <span class="demo-fit-tag">Slot Need</span>
+            <span class="demo-fit-tag">$48K NIL</span>
+          </div>
+          <div class="demo-fit-bar-wrap">
+            <div class="demo-fit-bar-fill" style="width:91%"></div>
+          </div>
+        </div>
+
+        <!-- Card 3: UCLA -->
+        <div class="demo-fit-card">
+          <div class="demo-fit-card-top">
+            <span class="demo-fit-rank">#3 Best Fit</span>
+            <span class="demo-fit-score-badge">87% Match</span>
+          </div>
+          <div class="demo-fit-school">UCLA</div>
+          <div class="demo-fit-conf">Big Ten · Los Angeles, CA</div>
+          <div class="demo-fit-tags">
+            <span class="demo-fit-tag">Pro Style</span>
+            <span class="demo-fit-tag">WR Depth</span>
+            <span class="demo-fit-tag">$61K NIL</span>
+          </div>
+          <div class="demo-fit-bar-wrap">
+            <div class="demo-fit-bar-fill" style="width:87%"></div>
+          </div>
+        </div>
+
+        <!-- View More button -->
+        <button id="demo-view-more-btn" onclick="showPage('signup', null)">
+          View More Fits
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+
+      </div>
+      <!-- end sidebar -->
+
+    </div>
+    <!-- end demo-body -->
+
   </div>
+  <!-- end demo-shell -->
 </div>
+<!-- end page-demo -->
 
 <script>
   function showPage(pageId, linkEl) {
