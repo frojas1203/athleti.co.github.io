@@ -1054,6 +1054,908 @@
     .about-hero { padding: 60px 24px 80px; }
     .nav-tabs { display: none; }
   }
+
+  /* ═══════════════════════════════════════════════════
+     COACH DASHBOARD PAGE  (#page-coach-dashboard)
+  ═══════════════════════════════════════════════════ */
+  #page-coach-dashboard {
+    padding-top: 72px;
+    min-height: 100vh;
+    background: #0d0f14;
+    display: none;
+  }
+  #page-coach-dashboard.active { display: block; }
+
+  /* Scope all coach styles inside the page */
+  #page-coach-dashboard .topnav { display: none !important; }
+
+  /* Coach layout fills full height below nav */
+  #page-coach-dashboard .layout {
+    min-height: calc(100vh - 72px);
+  }
+
+
+  :root {
+    --bg-primary: #0d0f14;
+    --bg-secondary: #13161e;
+    --bg-card: #181c26;
+    --bg-card-hover: #1e2330;
+    --border: #252a38;
+    --border-light: #2e3448;
+    --accent-red: #e8132a;
+    --accent-blue: #1a6cff;
+    --accent-gold: #c8a84b;
+    --text-primary: #f0f2f8;
+    --text-secondary: #8b92a8;
+    --text-muted: #545d75;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --smu-blue: #003087;
+    --smu-red: #CC0035;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── TOP NAV ── */
+  .topnav {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 2px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 3px;
+  }
+
+  .tab {
+    padding: 7px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+  }
+
+  .tab.active {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+
+  .tab:hover:not(.active) {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .topnav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-primary {
+    background: var(--accent-red);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: #c4102a; }
+
+  .coach-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .coach-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--smu-red);
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    flex: 1;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-section {
+    padding: 0 12px 8px;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8px 4px 6px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .sidebar-item:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+  .sidebar-item.active { background: rgba(232,19,42,0.12); color: var(--accent-red); border: 1px solid rgba(232,19,42,0.2); }
+  .sidebar-item.active .icon { color: var(--accent-red); }
+
+  .sidebar-item .icon { font-size: 15px; width: 18px; text-align: center; }
+
+  .badge-count {
+    margin-left: auto;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 1px 6px;
+  }
+
+  .opponent-chip {
+    margin: 12px 12px 0;
+    background: linear-gradient(135deg, rgba(0,48,135,0.4), rgba(204,0,53,0.2));
+    border: 1px solid rgba(0,48,135,0.5);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .opp-label { color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .opp-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; color: #fff; }
+  .opp-date { color: var(--text-secondary); font-size: 11px; margin-top: 2px; }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title .pill {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .pill-red { background: rgba(232,19,42,0.2); color: var(--accent-red); border: 1px solid rgba(232,19,42,0.3); }
+  .pill-blue { background: rgba(26,108,255,0.2); color: var(--accent-blue); border: 1px solid rgba(26,108,255,0.3); }
+  .pill-gold { background: rgba(200,168,75,0.2); color: var(--accent-gold); border: 1px solid rgba(200,168,75,0.3); }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  /* ── STAT CARDS ── */
+  .stat-row { display: flex; gap: 12px; }
+
+  .stat-card {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--border-light); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .stat-red { color: var(--accent-red); }
+  .stat-blue { color: var(--accent-blue); }
+  .stat-gold { color: var(--accent-gold); }
+  .stat-green { color: var(--success); }
+
+  /* ── SEARCH & FILTER ── */
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 9px 14px 9px 36px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    position: relative;
+  }
+
+  .search-input:focus { border-color: var(--accent-blue); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap .search-icon {
+    position: absolute;
+    left: 10px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .filter-select {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    outline: none;
+    min-width: 130px;
+  }
+
+  .filter-select:focus { border-color: var(--accent-blue); }
+
+  .criteria-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tag-active {
+    background: rgba(26,108,255,0.15);
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+  }
+
+  .tag-neutral {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .tag-remove { color: inherit; font-size: 13px; line-height: 1; }
+
+  /* ── PLAYER TABLE ── */
+  .table-wrap { overflow-x: auto; }
+
+  .player-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .player-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .player-table th:hover { color: var(--text-secondary); }
+
+  .player-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid rgba(37,42,56,0.6);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .player-table tr:last-child td { border-bottom: none; }
+
+  .player-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+  .player-name-cell { display: flex; align-items: center; gap: 10px; }
+
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .player-name { font-weight: 600; color: var(--text-primary); }
+  .player-school { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+  .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .score-bar-bg {
+    width: 60px; height: 5px;
+    background: var(--bg-primary);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .score-bar { height: 100%; border-radius: 3px; }
+
+  .pos-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .action-btn {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .action-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+  /* ── PERFORMANCE TRACKER ── */
+  .perf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+  .mini-chart {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+  }
+
+  .mini-chart-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .mini-chart-val { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); }
+  .mini-chart-delta { font-size: 11px; margin-top: 2px; }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--danger); }
+
+  /* Sparkline SVG */
+  .sparkline { display: block; margin-top: 6px; }
+
+  /* ── FILM BREAKDOWN ── */
+  .film-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .film-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+
+  .baylor-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(0,83,74,0.3), rgba(255,184,28,0.1));
+    border-radius: 8px;
+    border: 1px solid rgba(255,184,28,0.2);
+    margin-bottom: 14px;
+  }
+
+  .team-logo {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .matchup-info { flex: 1; }
+  .matchup-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .matchup-teams { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-primary); }
+  .matchup-meta { font-size: 11px; color: var(--text-secondary); }
+
+  .tip-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .tip-item:hover { border-left-color: var(--accent-gold); }
+  .tip-item.offense { border-left-color: var(--accent-red); }
+  .tip-item.defense { border-left-color: var(--accent-blue); }
+  .tip-item.special { border-left-color: var(--accent-gold); }
+
+  .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip-content {}
+  .tip-title { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+  .tip-body { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+
+  .priority-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .priority-high { background: rgba(232,19,42,0.2); color: var(--accent-red); }
+  .priority-med { background: rgba(245,158,11,0.2); color: var(--warning); }
+
+  /* ── RECRUITING FUNNEL ── */
+  .funnel-row {
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .funnel-stage {
+    flex: 1;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .funnel-stage::after {
+    content: '▶';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: var(--text-muted);
+    z-index: 1;
+  }
+
+  .funnel-stage:last-child::after { display: none; }
+
+  .funnel-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .funnel-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── PROGRESS BAR ── */
+  .prog-bar-row { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+
+  .prog-item { }
+  .prog-header { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+  .prog-name { color: var(--text-secondary); font-weight: 500; }
+  .prog-val { color: var(--text-primary); font-weight: 700; }
+
+  .prog-bg { height: 5px; background: var(--bg-primary); border-radius: 3px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+
+  /* ── METRIC MATRIX ── */
+  .metric-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .metric-cell {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+  }
+
+  .metric-cell-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 4px; }
+  .metric-cell-val { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; }
+  .metric-cell-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── TOGGLE SWITCH ── */
+  .criteria-builder {
+    background: var(--bg-primary);
+    border: 1px dashed var(--border-light);
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+
+  .criteria-title { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+  .criteria-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .criteria-name { font-size: 12px; color: var(--text-secondary); width: 100px; flex-shrink: 0; }
+
+  .range-inputs { display: flex; align-items: center; gap: 6px; }
+  .range-input {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    width: 80px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+  }
+
+  .range-input:focus { border-color: var(--accent-blue); }
+  .range-sep { color: var(--text-muted); font-size: 11px; }
+
+  .apply-btn {
+    background: linear-gradient(135deg, var(--accent-blue), #0f4fcf);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s;
+  }
+
+  .apply-btn:hover { opacity: 0.9; }
+
+  /* ── GAME LOG ── */
+  .game-log-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .game-log-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .game-log-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(37,42,56,0.5);
+    color: var(--text-secondary);
+  }
+
+  .game-log-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .game-log-table td:first-child { color: var(--text-primary); font-weight: 600; }
+
+  /* result badges */
+  .result-w { color: var(--success); font-weight: 700; }
+  .result-l { color: var(--danger); font-weight: 700; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+
+  /* ── TOOLTIP STYLE HEADERS ── */
+  .row-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .row-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: rgba(232,19,42,0.1);
+    border: 1px solid rgba(232,19,42,0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .alert-banner strong { color: var(--text-primary); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+  /* ── UPCOMING GAME BANNER ── */
+  .game-banner {
+    background: linear-gradient(135deg, rgba(0,48,135,0.25) 0%, rgba(204,0,53,0.15) 100%);
+    border: 1px solid rgba(0,48,135,0.4);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .game-vs-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .team-abbr {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .vs-divider {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .game-details { font-size: 12px; color: var(--text-secondary); }
+  .game-details strong { color: var(--text-primary); display: block; font-size: 14px; margin-bottom: 2px; }
+
+  .countdown-block { text-align: right; }
+  .countdown-val { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: var(--accent-gold); line-height: 1; }
+  .countdown-lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  .prep-progress {
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .prep-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .prep-bar-bg { height: 6px; background: var(--bg-primary); border-radius: 3px; overflow: hidden; }
+  .prep-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent-blue), #4fa3ff); }
+
+  /* position color chips */
+  .pos-qb { background: rgba(232,19,42,0.15); color: #ff6b7a; }
+  .pos-wr { background: rgba(26,108,255,0.15); color: #6ba3ff; }
+  .pos-rb { background: rgba(34,197,94,0.15); color: #6bffaa; }
+  .pos-ol { background: rgba(245,158,11,0.15); color: #ffd47a; }
+  .pos-lb { background: rgba(200,168,75,0.15); color: var(--accent-gold); }
+  .pos-db { background: rgba(139,92,246,0.15); color: #c4a3ff; }
+  .pos-dl { background: rgba(20,184,166,0.15); color: #5eead4; }
+  .pos-te { background: rgba(236,72,153,0.15); color: #f8a5d0; }
+
+  /* avatar color variants */
+  .av-1 { background: rgba(232,19,42,0.2); color: var(--accent-red); }
+  .av-2 { background: rgba(26,108,255,0.2); color: var(--accent-blue); }
+  .av-3 { background: rgba(34,197,94,0.2); color: var(--success); }
+  .av-4 { background: rgba(245,158,11,0.2); color: var(--warning); }
+  .av-5 { background: rgba(200,168,75,0.2); color: var(--accent-gold); }
+  .av-6 { background: rgba(139,92,246,0.2); color: #a78bfa; }
+
+  /* ── TABS INSIDE PANEL ── */
+  .inner-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .inner-tab {
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+  }
+
+  .inner-tab.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+  .inner-tab:hover:not(.active) { color: var(--text-secondary); }
+
+  /* ── FILM KEY LOOKS ── */
+  .film-key-row { display: flex; flex-direction: column; gap: 8px; }
+
+  .film-play-item {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .film-play-item:hover { border-color: var(--border-light); }
+
+  .play-icon {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    background: rgba(26,108,255,0.1);
+    border: 1px solid rgba(26,108,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .play-title { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+  .play-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+    .film-section { grid-template-columns: 1fr; }
+    .metric-matrix { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -1070,6 +1972,7 @@
     <li><a href="#" onclick="showPage('pricing',this)">Pricing</a></li>
     <li><a href="#" onclick="showPage('about',this)">About</a></li>
     <li><a href="#" onclick="showPage('demo',this)">Demo Player Dashboard</a></li>
+    <li><a href="#" onclick="showPage('coach-dashboard',this)">Demo Coach Dashboard</a></li>
     <li><a href="#" class="nav-cta" onclick="showPage('signup',this)">Get Early Access</a></li>
   </ul>
 </nav>
@@ -2107,6 +3010,771 @@
 </div>
 <!-- end page-demo -->
 
+
+<!-- ═══ DEMO COACH DASHBOARD PAGE ═══ -->
+<div id="page-coach-dashboard" class="page">
+  <!-- Coach identity bar (replaces the hidden inner nav) -->
+  <div style="background:#13161e;border-bottom:1px solid #252a38;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:44px;font-family:'Inter',sans-serif;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#8b92a8;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:#181c26;border:1px solid #252a38;border-radius:7px;padding:4px 12px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#CC0035;display:inline-block;"></span>
+        <strong style="color:#f0f2f8;">Rhett Lashlee</strong>&nbsp;· SMU Mustangs
+      </span>
+      <span style="background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.3);color:#c8a84b;border-radius:5px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">Head Coach Portal</span>
+    </div>
+    <button onclick="showPage('signup',null)" style="background:#e8132a;color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.3px;">+ Add Prospect</button>
+  </div>
+  <div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Coach Portal</div>
+      <div class="sidebar-item active">
+        <span class="icon">🏟</span> Dashboard
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">🔍</span> Talent Search
+        <span class="badge-count">127</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">📊</span> Player Dev
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">🎬</span> Film Room
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Recruiting</div>
+      <div class="sidebar-item">
+        <span class="icon">📋</span> Prospect Board
+        <span class="badge-count">41</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">💬</span> Communications
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">📅</span> Official Visits
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">🎓</span> Scholarship Tracker
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Analysis</div>
+      <div class="sidebar-item">
+        <span class="icon">📈</span> Season Analytics
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">⚔️</span> Opponent Scouting
+      </div>
+      <div class="sidebar-item">
+        <span class="icon">💰</span> NIL Budget
+      </div>
+    </div>
+
+    <div class="opponent-chip">
+      <div class="opp-label">Next Opponent</div>
+      <div class="opp-name">🐻 Baylor Bears</div>
+      <div class="opp-date">Sat, Nov 9 · Waco, TX</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- UPCOMING GAME BANNER -->
+    <div class="game-banner">
+      <div class="game-vs-block">
+        <div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Home</div>
+          <div class="team-abbr" style="color:var(--smu-red)">SMU</div>
+          <div style="font-size:10px;color:var(--text-secondary)">Mustangs · 6-2</div>
+        </div>
+        <div class="vs-divider">VS</div>
+        <div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Away</div>
+          <div class="team-abbr" style="color:#ffc72c">BAY</div>
+          <div style="font-size:10px;color:var(--text-secondary)">Bears · 5-3</div>
+        </div>
+        <div style="margin-left:20px;">
+          <div class="game-details">
+            <strong>AT&T Stadium · Waco, TX</strong>
+            Saturday November 9 · 3:30 PM CT · ESPN
+          </div>
+        </div>
+      </div>
+      <div class="prep-progress">
+        <div class="prep-label"><span>Game Prep Progress</span><span>74%</span></div>
+        <div class="prep-bar-bg"><div class="prep-bar" style="width:74%"></div></div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val">6</div>
+        <div class="countdown-lbl">Days Away</div>
+      </div>
+    </div>
+
+    <!-- TOP STAT CARDS -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Roster Size</div>
+        <div class="stat-value stat-red">118</div>
+        <div class="stat-sub">↑ 4 from last week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active Prospects</div>
+        <div class="stat-value stat-blue">41</div>
+        <div class="stat-sub">12 high-priority</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Scholarships Remaining</div>
+        <div class="stat-value stat-gold">7</div>
+        <div class="stat-sub">Class of 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg AI Perf Score</div>
+        <div class="stat-value stat-green">84.2</div>
+        <div class="stat-sub">↑ +3.1 vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Film Reviews Done</div>
+        <div class="stat-value" style="color:var(--text-primary)">23</div>
+        <div class="stat-sub">Baylor prep: 5 remaining</div>
+      </div>
+    </div>
+
+    <!-- ── TALENT PORTAL SECTION ── -->
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">
+          🔍 Talent Portal
+          <span class="pill pill-blue">127 Matches</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="action-btn" style="font-size:12px;">⬇ Export CSV</button>
+          <button class="action-btn" style="font-size:12px;">🔔 Set Alert</button>
+        </div>
+      </div>
+
+      <!-- SEARCH & FILTERS -->
+      <div class="search-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" type="text" placeholder="Search by name, school, position…" />
+        </div>
+        <select class="filter-select">
+          <option>All Positions</option>
+          <option>QB</option>
+          <option>RB</option>
+          <option>WR</option>
+          <option>TE</option>
+          <option>OL</option>
+          <option>DL</option>
+          <option>LB</option>
+          <option>DB</option>
+          <option>K/P</option>
+        </select>
+        <select class="filter-select">
+          <option>All Eligibility</option>
+          <option>Freshman</option>
+          <option>Sophomore</option>
+          <option>Junior</option>
+          <option>Senior</option>
+          <option>Graduate</option>
+        </select>
+        <select class="filter-select">
+          <option>All Conferences</option>
+          <option>ACC</option>
+          <option>Big 12</option>
+          <option>Big Ten</option>
+          <option>SEC</option>
+          <option>Pac-12</option>
+          <option>AAC</option>
+        </select>
+        <select class="filter-select">
+          <option>GPA: Any</option>
+          <option>GPA ≥ 3.5</option>
+          <option>GPA ≥ 3.0</option>
+          <option>GPA ≥ 2.5</option>
+        </select>
+      </div>
+
+      <!-- ACTIVE FILTER TAGS -->
+      <div class="criteria-tags">
+        <div class="tag tag-active">40yd &lt; 4.45s <span class="tag-remove">✕</span></div>
+        <div class="tag tag-active">Speed ≥ 85 <span class="tag-remove">✕</span></div>
+        <div class="tag tag-active">GPA ≥ 3.0 <span class="tag-remove">✕</span></div>
+        <div class="tag tag-active">Eligibility: Jr+Sr <span class="tag-remove">✕</span></div>
+        <div class="tag tag-neutral">+ Add Filter</div>
+      </div>
+
+      <!-- CUSTOM CRITERIA BUILDER -->
+      <div class="criteria-builder">
+        <div class="criteria-title">⚙️ Custom Performance Criteria Builder</div>
+        <div class="criteria-row">
+          <span class="criteria-name">40-Yard Dash</span>
+          <div class="range-inputs">
+            <input class="range-input" type="text" placeholder="Min (e.g. 4.3)" />
+            <span class="range-sep">to</span>
+            <input class="range-input" type="text" placeholder="Max (e.g. 4.6)" />
+            <span style="font-size:11px;color:var(--text-muted)">seconds</span>
+          </div>
+        </div>
+        <div class="criteria-row">
+          <span class="criteria-name">Vertical Jump</span>
+          <div class="range-inputs">
+            <input class="range-input" type="text" placeholder="Min (e.g. 32)" />
+            <span class="range-sep">to</span>
+            <input class="range-input" type="text" placeholder="Max (e.g. 42)" />
+            <span style="font-size:11px;color:var(--text-muted)">inches</span>
+          </div>
+        </div>
+        <div class="criteria-row">
+          <span class="criteria-name">Throw Accuracy</span>
+          <div class="range-inputs">
+            <input class="range-input" type="text" placeholder="Min (e.g. 70)" />
+            <span class="range-sep">to</span>
+            <input class="range-input" type="text" placeholder="Max (e.g. 100)" />
+            <span style="font-size:11px;color:var(--text-muted)">%</span>
+          </div>
+        </div>
+        <div class="criteria-row">
+          <span class="criteria-name">Bench Press</span>
+          <div class="range-inputs">
+            <input class="range-input" type="text" placeholder="Min reps" />
+            <span class="range-sep">+</span>
+            <span style="font-size:11px;color:var(--text-muted)">225 lb reps</span>
+          </div>
+        </div>
+        <button class="apply-btn">Apply Criteria</button>
+      </div>
+
+      <!-- PLAYER TABLE -->
+      <div class="table-wrap" style="margin-top:14px;">
+        <table class="player-table">
+          <thead>
+            <tr>
+              <th>Player ↕</th>
+              <th>Pos</th>
+              <th>School</th>
+              <th>Eligibility</th>
+              <th>GPA</th>
+              <th>40 YD</th>
+              <th>AI Score ↓</th>
+              <th>Interest</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="player-name-cell">
+                  <div class="avatar av-1">MJ</div>
+                  <div>
+                    <div class="player-name">Marcus Johnson</div>
+                    <div class="player-school">Texas A&M → Transfer Portal</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="pos-chip pos-wr">WR</span></td>
+              <td>Texas A&M</td>
+              <td>Junior</td>
+              <td>3.4</td>
+              <td>4.38</td>
+              <td>
+                <div class="score-bar-wrap">
+                  <span style="color:var(--success);font-weight:700;">97</span>
+                  <div class="score-bar-bg"><div class="score-bar" style="width:97%;background:var(--success)"></div></div>
+                </div>
+              </td>
+              <td><span class="status-dot" style="background:var(--success)"></span>High</td>
+              <td><button class="action-btn">View Profile</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="player-name-cell">
+                  <div class="avatar av-2">DW</div>
+                  <div>
+                    <div class="player-name">DeShawn Williams</div>
+                    <div class="player-school">TCU → Transfer Portal</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="pos-chip pos-qb">QB</span></td>
+              <td>TCU</td>
+              <td>Senior</td>
+              <td>3.1</td>
+              <td>4.62</td>
+              <td>
+                <div class="score-bar-wrap">
+                  <span style="color:#7bb3ff;font-weight:700;">92</span>
+                  <div class="score-bar-bg"><div class="score-bar" style="width:92%;background:var(--accent-blue)"></div></div>
+                </div>
+              </td>
+              <td><span class="status-dot" style="background:var(--warning)"></span>Medium</td>
+              <td><button class="action-btn">View Profile</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="player-name-cell">
+                  <div class="avatar av-3">KR</div>
+                  <div>
+                    <div class="player-name">Kendrick Rhodes</div>
+                    <div class="player-school">Oklahoma → Transfer Portal</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="pos-chip pos-lb">LB</span></td>
+              <td>Oklahoma</td>
+              <td>Graduate</td>
+              <td>3.7</td>
+              <td>4.51</td>
+              <td>
+                <div class="score-bar-wrap">
+                  <span style="color:var(--accent-gold);font-weight:700;">89</span>
+                  <div class="score-bar-bg"><div class="score-bar" style="width:89%;background:var(--accent-gold)"></div></div>
+                </div>
+              </td>
+              <td><span class="status-dot" style="background:var(--success)"></span>High</td>
+              <td><button class="action-btn">View Profile</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="player-name-cell">
+                  <div class="avatar av-4">TL</div>
+                  <div>
+                    <div class="player-name">Tyrese Logan</div>
+                    <div class="player-school">Houston → Transfer Portal</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="pos-chip pos-rb">RB</span></td>
+              <td>Houston</td>
+              <td>Junior</td>
+              <td>2.9</td>
+              <td>4.41</td>
+              <td>
+                <div class="score-bar-wrap">
+                  <span style="color:#ff8f9a;font-weight:700;">85</span>
+                  <div class="score-bar-bg"><div class="score-bar" style="width:85%;background:var(--accent-red)"></div></div>
+                </div>
+              </td>
+              <td><span class="status-dot" style="background:var(--text-muted)"></span>Low</td>
+              <td><button class="action-btn">View Profile</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="player-name-cell">
+                  <div class="avatar av-5">CA</div>
+                  <div>
+                    <div class="player-name">Chris Alvarez</div>
+                    <div class="player-school">Baylor → Transfer Portal</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="pos-chip pos-db">DB</span></td>
+              <td>Baylor</td>
+              <td>Senior</td>
+              <td>3.5</td>
+              <td>4.44</td>
+              <td>
+                <div class="score-bar-wrap">
+                  <span style="color:#c4a3ff;font-weight:700;">83</span>
+                  <div class="score-bar-bg"><div class="score-bar" style="width:83%;background:#7c3aed)"></div></div>
+                </div>
+              </td>
+              <td><span class="status-dot" style="background:var(--warning)"></span>Medium</td>
+              <td><button class="action-btn">View Profile</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── PLAYER PERFORMANCE TRACKER + GAME LOG ── -->
+    <div class="grid-2">
+
+      <!-- PLAYER DEVELOPMENT -->
+      <div class="card">
+        <div class="section-header">
+          <div class="section-title">
+            📈 Player Development Tracker
+            <span class="pill pill-red">SMU Roster</span>
+          </div>
+        </div>
+
+        <div class="inner-tabs">
+          <div class="inner-tab active">All Players</div>
+          <div class="inner-tab">Offense</div>
+          <div class="inner-tab">Defense</div>
+          <div class="inner-tab">Special Teams</div>
+        </div>
+
+        <!-- METRIC MATRIX -->
+        <div class="row-label">Team Avg Performance Metrics</div>
+        <div class="metric-matrix">
+          <div class="metric-cell">
+            <div class="metric-cell-label">Speed Score</div>
+            <div class="metric-cell-val stat-blue">87.4</div>
+            <div class="metric-cell-sub delta-up">↑ +2.1 MoM</div>
+          </div>
+          <div class="metric-cell">
+            <div class="metric-cell-label">Strength</div>
+            <div class="metric-cell-val stat-red">82.1</div>
+            <div class="metric-cell-sub delta-up">↑ +1.4 MoM</div>
+          </div>
+          <div class="metric-cell">
+            <div class="metric-cell-label">Accuracy</div>
+            <div class="metric-cell-val stat-gold">79.6</div>
+            <div class="metric-cell-sub delta-down">↓ -0.8 MoM</div>
+          </div>
+          <div class="metric-cell">
+            <div class="metric-cell-label">Agility</div>
+            <div class="metric-cell-val stat-green">91.2</div>
+            <div class="metric-cell-sub delta-up">↑ +3.5 MoM</div>
+          </div>
+        </div>
+
+        <div class="row-label" style="margin-top:14px;">Top Performers This Week</div>
+
+        <div class="prog-bar-row">
+          <div class="prog-item">
+            <div class="prog-header"><span class="prog-name">R. Steele · QB</span><span class="prog-val">94</span></div>
+            <div class="prog-bg"><div class="prog-fill" style="width:94%;background:linear-gradient(90deg,var(--accent-red),#ff6b7a)"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-header"><span class="prog-name">J. Walker · WR</span><span class="prog-val">88</span></div>
+            <div class="prog-bg"><div class="prog-fill" style="width:88%;background:linear-gradient(90deg,var(--accent-blue),#6ba3ff)"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-header"><span class="prog-name">T. Brooks · RB</span><span class="prog-val">85</span></div>
+            <div class="prog-bg"><div class="prog-fill" style="width:85%;background:linear-gradient(90deg,var(--success),#6bffaa)"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-header"><span class="prog-name">C. Hayes · OL</span><span class="prog-val">81</span></div>
+            <div class="prog-bg"><div class="prog-fill" style="width:81%;background:linear-gradient(90deg,var(--accent-gold),#ffd47a)"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-header"><span class="prog-name">D. Morris · LB</span><span class="prog-val">79</span></div>
+            <div class="prog-bg"><div class="prog-fill" style="width:79%;background:linear-gradient(90deg,#7c3aed,#c4a3ff)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME-BY-GAME METRICS -->
+      <div class="card">
+        <div class="section-header">
+          <div class="section-title">
+            📋 Post-Game Key Metrics
+            <span class="pill pill-gold">Per Game</span>
+          </div>
+        </div>
+
+        <div class="alert-banner" style="margin-bottom:12px;">
+          <span>⚠️</span>
+          <span><strong>Flag:</strong> R. Steele's completion % dropped to 58% vs Memphis — accuracy drills recommended before Baylor.</span>
+        </div>
+
+        <table class="game-log-table">
+          <thead>
+            <tr>
+              <th>Opponent</th>
+              <th>Result</th>
+              <th>Off Yds</th>
+              <th>Comp %</th>
+              <th>Rush Yds</th>
+              <th>Points</th>
+              <th>AI Rtg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Memphis</td>
+              <td><span class="result-w">W 38-24</span></td>
+              <td>394</td>
+              <td style="color:var(--warning)">58%</td>
+              <td>142</td>
+              <td>38</td>
+              <td style="color:var(--accent-blue)">81</td>
+            </tr>
+            <tr>
+              <td>@ Navy</td>
+              <td><span class="result-w">W 45-17</span></td>
+              <td>451</td>
+              <td style="color:var(--success)">72%</td>
+              <td>187</td>
+              <td>45</td>
+              <td style="color:var(--success)">93</td>
+            </tr>
+            <tr>
+              <td>UTSA</td>
+              <td><span class="result-w">W 31-14</span></td>
+              <td>376</td>
+              <td style="color:var(--success)">68%</td>
+              <td>131</td>
+              <td>31</td>
+              <td style="color:var(--success)">87</td>
+            </tr>
+            <tr>
+              <td>@ UCF</td>
+              <td><span class="result-l">L 21-28</span></td>
+              <td>302</td>
+              <td style="color:var(--danger)">51%</td>
+              <td>98</td>
+              <td>21</td>
+              <td style="color:var(--danger)">64</td>
+            </tr>
+            <tr>
+              <td>Rice</td>
+              <td><span class="result-w">W 52-10</span></td>
+              <td>523</td>
+              <td style="color:var(--success)">79%</td>
+              <td>211</td>
+              <td>52</td>
+              <td style="color:var(--success)">96</td>
+            </tr>
+            <tr>
+              <td>@ Tulane</td>
+              <td><span class="result-l">L 17-24</span></td>
+              <td>318</td>
+              <td style="color:var(--warning)">61%</td>
+              <td>87</td>
+              <td>17</td>
+              <td style="color:var(--warning)">72</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── BAYLOR FILM BREAKDOWN ── -->
+    <div class="film-section">
+
+      <!-- TIPS PANEL -->
+      <div class="film-card">
+        <div class="section-header">
+          <div class="section-title">
+            🎬 Baylor Film Breakdown
+            <span class="pill pill-gold">AI-Assisted</span>
+          </div>
+        </div>
+
+        <div class="baylor-logo-area">
+          <div class="team-logo" style="background:rgba(255,184,28,0.1);border:1px solid rgba(255,184,28,0.3);color:#ffc72c;font-size:24px;">🐻</div>
+          <div class="matchup-info">
+            <div class="matchup-label">Upcoming Matchup Prep</div>
+            <div class="matchup-teams">SMU Mustangs vs Baylor Bears</div>
+            <div class="matchup-meta">Waco, TX · Sat Nov 9 · 3:30 PM CT</div>
+          </div>
+        </div>
+
+        <div class="inner-tabs">
+          <div class="inner-tab active">Offense</div>
+          <div class="inner-tab">Defense</div>
+          <div class="inner-tab">Special Teams</div>
+          <div class="inner-tab">Tendencies</div>
+        </div>
+
+        <div class="tip-list">
+          <div class="tip-item offense">
+            <div class="tip-icon">🎯</div>
+            <div class="tip-content">
+              <div class="tip-title">RPO-Heavy Play-Calling <span class="priority-tag priority-high">HIGH</span></div>
+              <div class="tip-body">Baylor runs RPOs on 48% of 1st-down plays. Watch the QB's eyes pre-snap — their key blocker releases are a giveaway. DB alignment triggers the mesh read. Press man coverage forces faster decision-making and limits the run lane.</div>
+            </div>
+          </div>
+          <div class="tip-item offense">
+            <div class="tip-icon">↔️</div>
+            <div class="tip-content">
+              <div class="tip-title">Motion Before Snap <span class="priority-tag priority-high">HIGH</span></div>
+              <div class="tip-body">73% of possessions feature pre-snap WR motion. Follow the back-side corner's leverage — Baylor uses this to identify zone vs. man. Staying disciplined in coverage and not rotating early is critical to not giving away your scheme.</div>
+            </div>
+          </div>
+          <div class="tip-item offense">
+            <div class="tip-icon">🏃</div>
+            <div class="tip-content">
+              <div class="tip-title">Jet Sweep Series <span class="priority-tag priority-med">MED</span></div>
+              <div class="tip-body">Their #17 WR averages 12.3 YPC on jet sweeps. Key: DE must wrong-arm contain and not penetrate. MLB scrape exchange is essential. Film shows 3 of last 4 TDs came off play-action off jet fake — linebackers must stay disciplined.</div>
+            </div>
+          </div>
+          <div class="tip-item offense">
+            <div class="tip-icon">📐</div>
+            <div class="tip-content">
+              <div class="tip-title">Red Zone Fade Concept <span class="priority-tag priority-high">HIGH</span></div>
+              <div class="tip-body">Baylor scores on fade routes 61% of RZ trips. Their TE aligns as a wing and chips the EMOL before running a corner route. Press your boundary corner inside of 10 yards. Safety needs to hold the back pylon. Study clips 14, 17, 22 from the UCF game.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY FILM PLAYS -->
+      <div class="film-card">
+        <div class="section-header">
+          <div class="section-title">
+            📽 Key Film Looks to Study
+          </div>
+        </div>
+
+        <div class="row-label">Baylor's Top Offensive Formations</div>
+        <div class="film-key-row">
+          <div class="film-play-item">
+            <div class="play-icon">⚡</div>
+            <div>
+              <div class="play-title">Pistol Trips Right → RPO Peek</div>
+              <div class="play-desc">Occurs 22% of all snaps. Safety rotation cue: if Sam LB steps to boundary, predict QB pull. Run a 2-Read coverage with a robber in the hole.</div>
+            </div>
+          </div>
+          <div class="film-play-item">
+            <div class="play-icon">🔄</div>
+            <div>
+              <div class="play-title">11-Personnel Spread → PA Wheel</div>
+              <div class="play-desc">Their QB targets RB on wheel out of play-action 3x per game. MLB must chase the wheel; FS must sink on PA key. Do NOT over-rotate to the post.</div>
+            </div>
+          </div>
+          <div class="film-play-item">
+            <div class="play-icon">📌</div>
+            <div>
+              <div class="play-title">Empty → Quick Screen Flood</div>
+              <div class="play-desc">3-second timing route. CB must trigger downhill immediately at snap. Second level (OLB) must align in a "ghost" technique to squeeze the alley. Average 6.1 YAC when not contained.</div>
+            </div>
+          </div>
+          <div class="film-play-item">
+            <div class="play-icon">🛡</div>
+            <div>
+              <div class="play-title">Power Iso vs Bear Front</div>
+              <div class="play-desc">Baylor's OL averages 4.8 push in iso runs. Stack your NT at the A-gap and spike the 3-tech on the guard. Forcing a TFL here kills their play-clock strategy in 2nd-&-medium.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-label" style="margin-top:14px;">Defensive Tendencies vs SMU's Scheme</div>
+        <div class="film-key-row">
+          <div class="film-play-item">
+            <div class="play-icon" style="background:rgba(232,19,42,0.1);border-color:rgba(232,19,42,0.2);">🔒</div>
+            <div>
+              <div class="play-title">Baylor Cover 3 Trap — Exploit the Seam</div>
+              <div class="play-desc">Baylor blitzes 38% of 3rd-and-7+. TE seam vs single-high safety is favorable. Send slot on a curl-flat combo to force FS into run-pass conflict. QB reads: hot → TE seam → RB check-down.</div>
+            </div>
+          </div>
+          <div class="film-play-item">
+            <div class="play-icon" style="background:rgba(232,19,42,0.1);border-color:rgba(232,19,42,0.2);">🎯</div>
+            <div>
+              <div class="play-title">Boundary CB Shade — Go Deep Early</div>
+              <div class="play-desc">Baylor's boundary CB (#21) gives a 7-yard cushion on early downs. Attack with a go route at the 15-20 yard level on 1st/2nd down to soften coverage and open the intermediate crossing game.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RECRUITING FUNNEL ── -->
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">
+          🎓 Scholarship & Recruiting Funnel
+          <span class="pill pill-red">Class of 2025</span>
+        </div>
+        <button class="action-btn">View Full Board</button>
+      </div>
+
+      <div class="funnel-row" style="margin-bottom:16px;">
+        <div class="funnel-stage">
+          <div class="funnel-num stat-blue">127</div>
+          <div class="funnel-label">Identified</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num" style="color:var(--text-primary)">63</div>
+          <div class="funnel-label">Contacted</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num" style="color:var(--text-primary)">41</div>
+          <div class="funnel-label">Prospects</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num stat-gold">25</div>
+          <div class="funnel-label">Watchlisted</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num" style="color:var(--text-primary)">11</div>
+          <div class="funnel-label">Official Visit</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num stat-red">7</div>
+          <div class="funnel-label">Offered</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-num stat-green">3</div>
+          <div class="funnel-label">Committed</div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:4px;">
+        <div>
+          <div class="row-label">Committed Prospects</div>
+          <table class="game-log-table">
+            <thead><tr><th>Name</th><th>Pos</th><th>Stars</th></tr></thead>
+            <tbody>
+              <tr><td>J. Monroe</td><td><span class="pos-chip pos-wr" style="font-size:10px;padding:1px 6px;">WR</span></td><td>⭐⭐⭐⭐</td></tr>
+              <tr><td>A. Peters</td><td><span class="pos-chip pos-db" style="font-size:10px;padding:1px 6px;">DB</span></td><td>⭐⭐⭐⭐</td></tr>
+              <tr><td>L. Okafor</td><td><span class="pos-chip pos-dl" style="font-size:10px;padding:1px 6px;">DL</span></td><td>⭐⭐⭐⭐⭐</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="row-label">Needs by Position</div>
+          <div class="prog-bar-row">
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">Offensive Line</span><span class="prog-val" style="color:var(--danger)">3 needed</span></div>
+              <div class="prog-bg"><div class="prog-fill" style="width:30%;background:var(--danger)"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">Defensive Back</span><span class="prog-val" style="color:var(--warning)">2 needed</span></div>
+              <div class="prog-bg"><div class="prog-fill" style="width:50%;background:var(--warning)"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">Wide Receiver</span><span class="prog-val" style="color:var(--success)">Filled</span></div>
+              <div class="prog-bg"><div class="prog-fill" style="width:95%;background:var(--success)"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">Linebacker</span><span class="prog-val" style="color:var(--warning)">1 needed</span></div>
+              <div class="prog-bg"><div class="prog-fill" style="width:65%;background:var(--warning)"></div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row-label">Scholarship Budget</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="mini-chart">
+              <div class="mini-chart-label">Total Scholarships</div>
+              <div class="mini-chart-val">85</div>
+            </div>
+            <div class="mini-chart">
+              <div class="mini-chart-label">Currently Awarded</div>
+              <div class="mini-chart-val" style="color:var(--accent-blue)">78</div>
+            </div>
+            <div class="mini-chart">
+              <div class="mini-chart-label">Available</div>
+              <div class="mini-chart-val" style="color:var(--accent-gold)">7</div>
+              <div class="mini-chart-delta delta-up">Class of 2025 openings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="text-align:center;padding:10px 0;font-size:11px;color:var(--text-muted);">
+      Athleti.Co Coach Portal · SMU Mustangs · Powered by AI Performance Analytics
+    </div>
+
+  </main>
+</div>
+</div>
+<!-- end page-coach-dashboard -->
+
+
 <script>
   function showPage(pageId, linkEl) {
     // Hide all pages
@@ -2127,6 +3795,60 @@
     document.getElementById('player-form').style.display = type === 'player' ? 'block' : 'none';
     document.getElementById('coach-form').style.display = type === 'coach' ? 'block' : 'none';
   }
+
+
+  // ── Coach Dashboard inner tab interactions ──
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inner panel tabs
+    document.querySelectorAll('#page-coach-dashboard .inner-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.inner-tab').forEach(function(t) { t.classList.remove('active'); });
+        this.classList.add('active');
+      });
+    });
+
+    // Sidebar items
+    document.querySelectorAll('#page-coach-dashboard .sidebar-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('#page-coach-dashboard .sidebar-item').forEach(function(i) { i.classList.remove('active'); });
+        this.classList.add('active');
+      });
+    });
+
+    // Criteria tag remove
+    document.querySelectorAll('#page-coach-dashboard .tag-remove').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        this.closest('.tag').remove();
+      });
+    });
+
+    // Apply criteria button
+    var applyBtn = document.querySelector('#page-coach-dashboard .apply-btn');
+    if (applyBtn) {
+      applyBtn.addEventListener('click', function() {
+        this.textContent = '✓ Criteria Applied!';
+        this.style.background = 'linear-gradient(135deg, #16a34a, #22c55e)';
+        var btn = this;
+        setTimeout(function() {
+          btn.textContent = 'Apply Criteria';
+          btn.style.background = '';
+        }, 2000);
+      });
+    }
+
+    // Film play item highlight
+    document.querySelectorAll('#page-coach-dashboard .film-play-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('#page-coach-dashboard .film-play-item').forEach(function(i) {
+          i.style.background = '';
+          i.style.borderColor = '';
+        });
+        this.style.background = 'rgba(26,108,255,0.08)';
+        this.style.borderColor = 'var(--accent-blue)';
+      });
+    });
+  });
+
 </script>
 
 </body>
